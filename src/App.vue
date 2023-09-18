@@ -1,12 +1,33 @@
 <template>
-    <primary-button title="создать"></primary-button>
-    <router-view />
+  <div class="main">
+    <Header class="header"/>
+    <Menu/>
+    <Content/>
+  </div>
+  <router-view />
 </template>
 
 <script setup lang="ts">
-import PrimaryButton from '../src/shared/ui/PrimaryButton/PrimaryButton';
+import Header from "@/widgets/Header/Header.vue";
+import Menu from "@/widgets/Menu/Menu.vue";
+import Content from "@/widgets/Content/Content.vue";
+
+const color = "#fff";
+const getTitle = (): string => {
+  return "title";
+}
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import '../src/shared/css/index.css';
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 5fr;
+}
+
+.header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
 </style>

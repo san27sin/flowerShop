@@ -1,5 +1,5 @@
 <template>
-    <button>
+    <button class="button">
         {{ title }}
     </button>
 </template>
@@ -13,7 +13,10 @@ const props = defineProps<IProps>();
 
 <style lang="scss" scoped>
 .button {
-    background: #030319;
-    padding: 19px 38px;
+  background: #030319;
+  padding: 19px 38px;
+  color: #fff;
+  border-radius: 24px;
+  font-size: 24px;
 }
 </style>
