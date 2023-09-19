@@ -2,9 +2,8 @@
   <div class="main">
     <Header class="header"/>
     <Menu/>
-    <Content/>
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <script setup lang="ts">
@@ -22,7 +21,7 @@ const getTitle = (): string => {
 @import '../src/shared/css/index.css';
 .main {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 10fr;
   grid-template-rows: 1fr 5fr;
 }
 

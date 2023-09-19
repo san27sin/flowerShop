@@ -1,30 +1,79 @@
 <template>
-  <nav class="menu" v-for="name in buttonNames" :key="name">
-    <SecondaryButton :title="name"/>
+  <nav class="menu">
+    <router-link v-for="link in links" :key="link.name" to="link.path" class="link">{{ link.name }}</router-link>
   </nav>
 </template>
 
 <script setup lang="ts">
 import SecondaryButton from "@/shared/ui/SecondaryButton/SecondaryButton.vue";
 
-const buttonNames = [
-    "Категории",
-    "Преимущества",
-    "Контакты",
-    "Подписки",
-    "Новости",
-    "Заявки",
-    "Вопросы/ответы",
-    "Клиенты",
-    "Отзывы",
-    "Заказы",
-    "Черный список"
+const links = [ // стоит ли создавать класс
+  {
+    name: "Категории",
+    path: "#"
+  },
+  {
+    name: "Преимущества",
+    path: "#"
+  },
+  {
+    name: "Контакты",
+    path: "#"
+  },
+  {
+    name: "Подписки",
+    path: "#"
+  },
+  {
+    name: "Новости",
+    path: "#"
+  },
+  {
+    name: "Заявки",
+    path: "#"
+  },
+  {
+    name: "Вопросы/ответы",
+    path: "#"
+  },
+  {
+    name: "Клиенты",
+    path: "#"
+  },
+  {
+    name: "Отзывы",
+    path: "#"
+  },
+  {
+    name: "Заказы",
+    path: "#"
+  },
+  {
+    name: "Черный список",
+    path: "#"
+  }
 ]
 </script>
 
 <style scoped lang="scss">
   .menu {
-    display: block;
+    display: flex; /* добавляется родителю */
+    flex-direction: column;
+    justify-content: flex-start;
     background: linear-gradient(94deg, rgba(4,4,26,1) 0%, rgba(21,22,77,1) 100%);
+  }
+
+  .link {
+    border: 1px solid #595959; /* Толщина рамки в пикселах,
+                           тип границы (в данном случае сплошная линия) и
+                           цвет линии */
+    padding: 5px; /* Расстояние от текста до рамки */
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    /*letter-spacing: 0em;*/
+    text-align: left;
   }
 </style>

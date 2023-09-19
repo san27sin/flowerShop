@@ -2,7 +2,7 @@
   <header class="header">
     <div class="container d-grid">
       <router-link to="/" class="logo">
-        <img src="@/assets/e57cb9aa-2f04-46a8-9272-c265ebe79c7c.png" alt="">
+        <img src="@/assets/Logo.svg" alt="">
       </router-link>
 
       <secondary-button title="Выйти"/>
