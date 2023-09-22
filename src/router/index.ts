@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/categories',
         name: 'categories',
-        component: () => import('../pages/CategoriesView.vue')
+        component: () => import('../pages/CategoryView.vue')
     },
 ];
 

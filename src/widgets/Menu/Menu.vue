@@ -1,6 +1,6 @@
 <template>
   <nav class="menu">
-    <router-link v-for="link in links" :key="link.name" to="link.path" class="link">{{ link.name }}</router-link>
+    <router-link v-for="link in links" :key="link.name" :to="link.path" class="link">{{ link.name }}</router-link>
   </nav>
 </template>
 
@@ -10,47 +10,47 @@ import SecondaryButton from "@/shared/ui/SecondaryButton/SecondaryButton.vue";
 const links = [ // стоит ли создавать класс
   {
     name: "Категории",
-    path: "#"
+    path: "/categories"
   },
   {
     name: "Преимущества",
-    path: "#"
+    path: ""
   },
   {
     name: "Контакты",
-    path: "#"
+    path: ""
   },
   {
     name: "Подписки",
-    path: "#"
+    path: ""
   },
   {
     name: "Новости",
-    path: "#"
+    path: ""
   },
   {
     name: "Заявки",
-    path: "#"
+    path: ""
   },
   {
     name: "Вопросы/ответы",
-    path: "#"
+    path: ""
   },
   {
     name: "Клиенты",
-    path: "#"
+    path: ""
   },
   {
     name: "Отзывы",
-    path: "#"
+    path: ""
   },
   {
     name: "Заказы",
-    path: "#"
+    path: ""
   },
   {
     name: "Черный список",
-    path: "#"
+    path: ""
   }
 ]
 </script>
