@@ -1,5 +1,11 @@
 <template>
-  <input @input="($event) => onInput($event.target.value)" :value="modelValue" :placeholder="placeholder" class="input" type="text">
+  <input
+      @input="($event) => onInput($event.target.value)"
+      :value="modelValue"
+      :placeholder="placeholder"
+      class="input"
+      type="text"
+  >
 </template>
 
 <script setup lang="ts">
