@@ -10,8 +10,10 @@
     <tr v-for="(category, index) of categoriesStore.categories" :key="category.title">
       <th scope="row">{{ index + 1 }}</th>
       <td>{{category.title}}</td>
-      <button @click="categoriesStore.deleteCategory(index)">Удалить</button>
-      <button @click="categoriesStore.editCategory(index)">Редактировать</button>
+      <button @click="categoriesStore.deleteCategory(index)">
+        <img src="@/assets/deleteButton.svg" alt="удалить">
+      </button>
+      <button class="delete" @click="categoriesStore.editCategory(index)">Х</button>
     </tr>
     </tbody>
   </table>
@@ -24,5 +26,9 @@ const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped lang="scss">
+.delete {
+  border-radius: 12px;
+  background: #E00;
 
+}
 </style>

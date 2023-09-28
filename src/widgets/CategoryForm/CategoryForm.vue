@@ -1,6 +1,6 @@
 <template>
-  <CreateCategory v-if="bEdited"/>
-  <edit-category v-else/>
+  <CreateCategory/>
+  <edit-category :b-open-model="categoriesStore.bEdited"/>
 </template>
 
 <script setup lang="ts">
@@ -8,7 +8,7 @@ import CreateCategory from "@/features/categories/CreateCategory.vue";
 import EditCategory from "@/features/categories/EditCategory.vue";
 import {useCategoriesStore} from "@/features/categories/categoriesStore";
 
-const { bEdited } = useCategoriesStore();
+const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped lang="scss">
