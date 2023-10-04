@@ -37,6 +37,7 @@ export const useCategoriesStore = defineStore('categories', () => {
     const updateCategory = () => {
         categories.value[indexEdited].title = category.title;
         categories.value[indexEdited].urlImage = category.urlImage;
+        bEdited.value= false;
     }
 
     const cancel = ()=> {
