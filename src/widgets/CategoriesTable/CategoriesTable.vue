@@ -10,10 +10,14 @@
     <tr v-for="(category, index) of categoriesStore.categories" :key="category.title">
       <th scope="row">{{ index + 1 }}</th>
       <td>{{category.title}}</td>
-      <button @click="categoriesStore.editCategory(index)">
-        <img src="@/assets/deleteButton.svg" alt="увше">
-      </button>
-      <button class="delete" @click="categoriesStore.deleteCategory(index)">Х</button>
+      <td>
+        <div class="buttons">
+          <button class="edit" @click="categoriesStore.editCategory(index)">
+            <img src="@/assets/deleteButton.svg" alt="">
+          </button>
+          <button class="delete" @click="categoriesStore.deleteCategory(index)">Х</button>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -26,9 +30,28 @@ const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped lang="scss">
+.edit {
+  width: 37px;
+  height: 37px;
+  border: none;
+  background: #FFFFFF;
+}
+
 .delete {
+  width: 37px;
+  height: 37px;
+  border: none;
   border-radius: 12px;
   background: #E00;
+}
 
+.align__right {
+  text-align: right;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
 }
 </style>

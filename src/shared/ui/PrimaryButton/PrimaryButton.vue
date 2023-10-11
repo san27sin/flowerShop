@@ -14,9 +14,11 @@ const props = defineProps<IProps>();
 <style lang="scss" scoped>
 .button {
   background: #030319;
-  padding: 19px 38px;
   color: #fff;
   border-radius: 24px;
   font-size: 24px;
+  width: 169px;
+  height: 62px;
+  margin: 10px;
 }
 </style>

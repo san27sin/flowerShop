@@ -11,6 +11,7 @@ export const useCategoriesStore = defineStore('categories', () => {
 
     const bEdited = ref<boolean>(false);
     let indexEdited: number;
+    let editedIndex = -1;
 
     const category: ICategorySend = reactive<ICategorySend>({
         title: "",
@@ -29,9 +30,15 @@ export const useCategoriesStore = defineStore('categories', () => {
 
     const editCategory = (index: number) => {
         bEdited.value = true;
+        editedIndex = index;
         category.title = categories.value[index].title;
         category.urlImage = categories.value[index].urlImage;
         indexEdited = index;
+    }
+
+    const deleteEditedCategory = () => {
+        deleteCategory(editedIndex);
+        bEdited.value = false;
     }
 
     const updateCategory = () => {
@@ -51,6 +58,7 @@ export const useCategoriesStore = defineStore('categories', () => {
         category,
         createCategory,
         deleteCategory,
+        deleteEditedCategory,
         editCategory,
         bEdited,
         updateCategory,

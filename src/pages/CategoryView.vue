@@ -12,5 +12,10 @@ import CategoryForm from "@/widgets/CategoryForm/CategoryForm.vue";
 </script>
 
 <style scoped>
-
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 50px;
+}
 </style>

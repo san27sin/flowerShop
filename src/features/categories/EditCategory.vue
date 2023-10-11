@@ -1,13 +1,18 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <div class="flowers">
-        <img src="@/assets/flowers.svg" alt="flowers">
+      <div class="modal-photo">
+        <img class="modal-photo-flower" src="@/assets/flowers.svg" alt="flowers">
       </div>
-      <UiInput v-model="categoriesStore.category.title" placeholder="имя категории"/>
-      <UiInput v-model="categoriesStore.category.urlImage" placeholder="url картинки"/>
-      <PrimaryButton @click="categoriesStore.updateCategory()" title="Редактировать"/>
-      <PrimaryButton @click="categoriesStore.cancel()" title="Отмена"/>
+      <div class="modal-form">
+        <UiInput v-model="categoriesStore.category.title" placeholder="имя категории"/>
+        <UiInput v-model="categoriesStore.category.urlImage" placeholder="url картинки"/>
+        <div class="buttons">
+          <success-button class="success-button" @click="categoriesStore.updateCategory()" title="Сохранить"/>
+          <DangerButton class="danger-button" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
+          <PrimaryButton class="primary-button" @click="categoriesStore.cancel()" title="Закрыть"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,27 +22,44 @@ import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import {useCategoriesStore} from "@/features/categories/categoriesStore";
 import {ref} from "vue";
+import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
+import SuccessButton from "@/shared/ui/SuccessButton/SuccessButton.vue";
 interface IPropse {
   bOpenModel: boolean,
 }
+
 const test = ref(false);
 const props = defineProps<IPropse>();
 const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped lang="scss">
-.flowers {
+.success-button {
+  width: 133px;
+  height: 46px;
+}
+
+.danger-button {
+  width: 133px;
+  height: 46px;
+}
+
+.primary-button {
+  width: 112px;
+  height: 46px;
+  font-size: 19px;
+}
+
+.modal-photo {
   display: flex;
-  width: 282px;
-  height: 314px;
-  padding: 33px 17px;
+  overflow: hidden;
+}
+
+.modal-form {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
-  border-radius: 21px;
-  border: 1px solid #030319;
-  box-shadow: 2px 2px 5px 0px #000;
 }
 
 .modal-backdrop {
@@ -49,15 +71,31 @@ const categoriesStore = useCategoriesStore();
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.modal {
-  overflow-x: auto;
+.modal-photo-flower {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 300px;
-  width: 400px;
-  background: #FFFFFF;
+  width: 15vw;
+  height: auto;
+  box-shadow: 1px 1px 10px #000;
+  margin: 28px;
+  border: 2px solid;
+  border-radius: 12px;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 26px;
+  background: #FFF;
+  width: 50vw;
+  height: 50vh;
+  flex-shrink: 0;
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   box-shadow: 2px 2px 20px 1px;
 }
+
 </style>

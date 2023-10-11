@@ -20,9 +20,10 @@ const getTitle = (): string => {
 <style lang="scss" scoped>
 @import '../src/shared/css/index.css';
 .main {
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 10fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: max-content 5fr;
 }
 
 .header {

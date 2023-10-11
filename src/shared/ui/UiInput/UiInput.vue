@@ -3,6 +3,7 @@
       @input="($event) => onInput($event.target.value)"
       :value="modelValue"
       :placeholder="placeholder"
+      :name="name"
       class="input"
       type="text"
   >
@@ -12,6 +13,7 @@
 interface IProps {
   placeholder: string
   modelValue: string // зарезервированное св-ство
+  name: string
 }
 const props = defineProps<IProps>()
 const emit = defineEmits(['update:modelValue'])
@@ -25,6 +27,9 @@ function onInput(text: string) {
   .input {
     border: 1px solid #04041A;
     padding: 21px 28px;
+    margin: 10px;
     border-radius: 31px;
+    width: 25vw;
+    height: 62px;
   }
 </style>

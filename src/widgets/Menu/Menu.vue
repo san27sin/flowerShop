@@ -14,11 +14,11 @@ const links = [ // стоит ли создавать класс
   },
   {
     name: "Преимущества",
-    path: ""
+    path: "/advantage"
   },
   {
     name: "Контакты",
-    path: ""
+    path: "/contacts"
   },
   {
     name: "Подписки",

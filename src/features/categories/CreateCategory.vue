@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="categoriesStore.createCategory()">
+  <form class="form" @submit.prevent="categoriesStore.createCategory()">
     <UiInput v-model="categoriesStore.category.title" placeholder="Введите имя категории"/>
     <UiInput v-model="categoriesStore.category.urlImage" placeholder="Введите url картинки"/>
     <PrimaryButton title="Создать"/>
@@ -15,5 +15,8 @@ const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped>
-
+.form {
+  display: flex;
+  gap: 23px;
+}
 </style>
