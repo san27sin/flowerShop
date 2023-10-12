@@ -26,10 +26,7 @@ function onInput(text: string) {
 <style scoped lang="scss">
   .input {
     border: 1px solid #04041A;
-    padding: 21px 28px;
-    margin: 10px;
+    padding: 20px;
     border-radius: 31px;
-    width: 25vw;
-    height: 62px;
   }
 </style>

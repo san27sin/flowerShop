@@ -18,14 +18,13 @@ const props = withDefaults(defineProps<IProps>(), {
   background-position: center;
 }
 .button {
-  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 19px;
-  height: 50px;
   border-radius: 12px;
   color: #fff;
   background-color: #1A8509;
   border: none;
-  margin: 10px;
-  text-align: center;
 }
 </style>

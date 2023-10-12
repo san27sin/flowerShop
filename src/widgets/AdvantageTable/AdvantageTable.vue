@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAdvantageStore } from "@/features/advantage/advantageStore";
+import { useAdvantageStore } from "@/features/advantage/advantagiesStore";
 
 const advantageStore = useAdvantageStore();
 </script>

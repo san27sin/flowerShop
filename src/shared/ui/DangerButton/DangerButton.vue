@@ -16,14 +16,14 @@ const props = withDefaults(defineProps<IProps>(), {
 
 <style scoped>
 .button {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #EE0000;
   border-radius: 12px;
   color: #fff;
   border: none;
-  margin: 10px;
+  padding: 10px;
   font-size: 19px;
-  text-align: center;
 }
 </style>

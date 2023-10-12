@@ -1,8 +1,8 @@
 <template>
   <form class="form" @submit.prevent="categoriesStore.createCategory()">
-    <UiInput v-model="categoriesStore.category.title" placeholder="Введите имя категории"/>
-    <UiInput v-model="categoriesStore.category.urlImage" placeholder="Введите url картинки"/>
-    <PrimaryButton title="Создать"/>
+    <UiInput class="input_category" v-model="categoriesStore.category.title" placeholder="Введите имя категории"/>
+    <UiInput class="input_category" v-model="categoriesStore.category.urlImage" placeholder="Введите url картинки"/>
+    <PrimaryButton class="button_primary" title="Создать"/>
   </form>
 </template>
 
@@ -18,5 +18,15 @@ const categoriesStore = useCategoriesStore();
 .form {
   display: flex;
   gap: 23px;
+}
+
+.input_category {
+  width: 35%;
+  height: 70%;
+}
+
+.button_primary {
+  width: 15%;
+  height: 70%;
 }
 </style>

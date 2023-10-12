@@ -14,12 +14,13 @@ const props = defineProps<IProps>();
 
 <style lang="scss" scoped>
   .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
     color: #030319;
     border-radius: 24px;// скосить углы
     border: 1px solid #030319;// ширина вид цвет
     font-size: 20px;
-    width: 169px;
-    height: 40px;
   }
 </style>

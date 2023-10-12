@@ -5,12 +5,12 @@
         <img class="modal-photo-flower" src="@/assets/flowers.svg" alt="flowers">
       </div>
       <div class="modal-form">
-        <UiInput v-model="categoriesStore.category.title" placeholder="имя категории"/>
-        <UiInput v-model="categoriesStore.category.urlImage" placeholder="url картинки"/>
+        <UiInput class="modal_form_input" v-model="categoriesStore.category.title" placeholder="имя категории"/>
+        <UiInput class="modal_form_input" v-model="categoriesStore.category.urlImage" placeholder="url картинки"/>
         <div class="buttons">
-          <success-button class="success-button" @click="categoriesStore.updateCategory()" title="Сохранить"/>
-          <DangerButton class="danger-button" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
-          <PrimaryButton class="primary-button" @click="categoriesStore.cancel()" title="Закрыть"/>
+          <success-button class="buttons_success" @click="categoriesStore.updateCategory()" title="Сохранить"/>
+          <DangerButton class="buttons_danger" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
+          <PrimaryButton class="buttons_close" @click="categoriesStore.cancel()" title="Закрыть"/>
         </div>
       </div>
     </div>
@@ -34,34 +34,6 @@ const categoriesStore = useCategoriesStore();
 </script>
 
 <style scoped lang="scss">
-.success-button {
-  width: 133px;
-  height: 46px;
-}
-
-.danger-button {
-  width: 133px;
-  height: 46px;
-}
-
-.primary-button {
-  width: 112px;
-  height: 46px;
-  font-size: 19px;
-}
-
-.modal-photo {
-  display: flex;
-  overflow: hidden;
-}
-
-.modal-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -69,17 +41,6 @@ const categoriesStore = useCategoriesStore();
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
-}
-
-.modal-photo-flower {
-  display: flex;
-  align-items: center;
-  width: 15vw;
-  height: auto;
-  box-shadow: 1px 1px 10px #000;
-  margin: 28px;
-  border: 2px solid;
-  border-radius: 12px;
 }
 
 .modal {
@@ -98,4 +59,47 @@ const categoriesStore = useCategoriesStore();
   box-shadow: 2px 2px 20px 1px;
 }
 
+.modal-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-photo-flower {
+  display: flex;
+  align-items: center;
+  width: 15vw;
+  height: auto;
+  box-shadow: 1px 1px 10px #000;
+  margin: 28px;
+  border: 2px solid;
+  border-radius: 12px;
+}
+
+.modal-form {
+  display: flex;
+  gap: 5%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_form_input {
+  width: 90%;
+  height: 20%;
+}
+
+.buttons {
+  display: flex;
+  gap: 5%;
+  justify-content: flex-end;
+  width: 90%;
+}
+
+@media (max-width: 1024px) {
+  .modal {
+    width: 70vw;
+  }
+}
 </style>

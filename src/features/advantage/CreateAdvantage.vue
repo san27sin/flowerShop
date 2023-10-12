@@ -1,12 +1,12 @@
 <template>
   <form action="" class="form">
     <div class="up">
-      <UiInput name="name" v-model="advantageStore.advantage.title" placeholder="Введите название преимущества"/>
-      <UiInput name="url" v-model="advantageStore.advantage.urlImage" placeholder="Введите url картинки"/>
-      <PrimaryButton title="Создать" @click="advantageStore.addAdvantage()"/>
+      <UiInput class="input_advance_up" name="name" v-model="advantageStore.advantage.title" placeholder="Введите название преимущества"/>
+      <UiInput class="input_advance_up" name="url" v-model="advantageStore.advantage.urlImage" placeholder="Введите url картинки"/>
+      <PrimaryButton class="button_create" title="Создать" @click="advantageStore.addAdvantage()"/>
     </div>
     <div class="down">
-      <UiInput class="description" name="desc" v-model="advantageStore.advantage.desc" placeholder="Введите описание"/>
+      <UiInput class="input_advance_down" name="desc" v-model="advantageStore.advantage.desc" placeholder="Введите описание"/>
     </div>
   </form>
 </template>
@@ -15,7 +15,7 @@
 
 import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
-import { useAdvantageStore } from "@/features/advantage/advantageStore";
+import { useAdvantageStore } from "@/features/advantage/advantagiesStore";
 
 const advantageStore = useAdvantageStore();
 </script>
@@ -27,7 +27,24 @@ const advantageStore = useAdvantageStore();
   width: 64vw;
 }
 
-.description {
-  width: 62vw;
+.up {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.button_create {
+  width: 18%;
+  height: 70%;
+}
+
+.input_advance_up {
+  width: 35%;
+  height: 70%;
+}
+
+.input_advance_down {
+  width: 100%;
+  height: 70%;
 }
 </style>

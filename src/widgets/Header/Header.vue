@@ -5,7 +5,7 @@
         <img src="@/assets/Logo.svg" alt="">
       </router-link>
 
-      <secondary-button title="Выйти"/>
+      <secondary-button class="button_exit" title="Выйти"/>
     </div>
   </header>
 </template>
@@ -32,5 +32,10 @@ export default defineComponent({
     grid-template-columns: 175px max-content;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .button_exit {
+    width: 10vw;
+    height: 4hw;
   }
 </style>

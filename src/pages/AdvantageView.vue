@@ -13,10 +13,5 @@ import AdvantageTable from "@/widgets/AdvantageTable/AdvantageTable.vue";
 </script>
 
 <style scoped lang="scss">
-.page { /* сделать один глобальный класс */
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  padding: 30px;
-}
+@import '@/shared/css/index.css';
 </style>
