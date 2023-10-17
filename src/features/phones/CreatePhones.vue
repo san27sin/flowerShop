@@ -2,7 +2,7 @@
   <div class="form_phone">
     <h3>Номера телефонов</h3>
     <div class="form_phone_list" v-for="(phone, index) of phoneStore.phones" :key="phone.id">
-      <UiInput name="phone" v-model="phone.phoneNumber" pattern="^\+\d{1,3}\s\d{1,3}-\d{1,4}-\d{1,4}$" placeholder="Введите номер телефона"/>
+      <UiInput name="phone" v-model="phone.phoneNumber" placeholder="Введите номер телефона"/>
       <PrimaryButton class="button_add button_phones_common" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
       <danger-button class="button_del button_phones_common" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
     </div>
