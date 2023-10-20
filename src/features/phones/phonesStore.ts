@@ -3,13 +3,13 @@ import {ref} from "vue";
 
 export interface IPhone {
     id: number;
-    phoneNumber: string;
+    phone: string;
 }
 
 export const usePhoneStore = defineStore('phone', () => {
     const phone: IPhone = {
         id: new Date().getTime(),
-        phoneNumber: "",
+        phone: "",
     };
 
     const phones = ref<IPhone[]>([{...phone}]);

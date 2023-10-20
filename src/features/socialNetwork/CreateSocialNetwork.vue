@@ -7,7 +7,8 @@
       <primary-button class="button_add button_social_network_common" @click="socialNetworkStore.createInput()" v-if="index === 0" title="+"/>
       <DangerButton class="button_del button_social_network_common" @click="socialNetworkStore.deleteInput(index)" v-else title="x"/>
     </div>
-    <primary-button class="button_save button_social_network_common" @click="socialNetworkStore.saveDateAndSendToDb()" title="Сохранить"/>
+    <error-list :err-messages="errMessages"/>
+    <primary-button class="button_save button_social_network_common" @click="submitFormValidate" title="Сохранить"/>
   </div>
 </template>
 
@@ -16,8 +17,28 @@ import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
 import { useSocialNetworkStore } from "@/features/socialNetwork/socialNetworkStore";
+import { ref } from "vue";
+import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
 
 const socialNetworkStore = useSocialNetworkStore();
+const errMessages = ref<string[]>([]);
+const submitFormValidate = () => {
+  errMessages.value.splice(0,errMessages.value.length);
+  // Паттерн для проверки ссылки
+  const linkPattern = /^(http|https):\/\/([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/;
+  const incorrectUrlPhoto = socialNetworkStore.socialNetworks.find(social => !linkPattern.test(social.urlImage));
+  if (incorrectUrlPhoto) {
+    errMessages.value.push("Некорректная ссылка картинки!")
+  }
+
+  const incorrectUrlSocial = socialNetworkStore.socialNetworks.find(social => !linkPattern.test(social.urlSocialNetwork));
+  if (incorrectUrlSocial) {
+    errMessages.value.push("Некорректная ссылка соцсети!")
+  }
+
+  if (errMessages.value.length) return;
+  socialNetworkStore.saveDateAndSendToDb();
+}
 </script>
 
 <style scoped lang="scss">
