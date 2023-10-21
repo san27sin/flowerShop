@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import {reactive, ref} from "vue";
+import {usePopupStore} from "@/features/popup/popupStore";
 
 export interface ICategorySend {
     title: string;
@@ -7,13 +8,18 @@ export interface ICategorySend {
 }
 
 export const useCategoriesStore = defineStore('categories', () => {
+    const popupStore = usePopupStore();
     const categories = ref<ICategorySend[]>([]);
 
-    const bEdited = ref<boolean>(false);
     let indexEdited: number;
     let editedIndex = -1;
 
     const category: ICategorySend = reactive<ICategorySend>({
+        title: "",
+        urlImage:""
+    })
+
+    const editedCategory: ICategorySend = reactive<ICategorySend>({
         title: "",
         urlImage:""
     })
@@ -29,38 +35,34 @@ export const useCategoriesStore = defineStore('categories', () => {
     }
 
     const editCategory = (index: number) => {
-        bEdited.value = true;
+        popupStore.togglePopup();
         editedIndex = index;
-        category.title = categories.value[index].title;
-        category.urlImage = categories.value[index].urlImage;
+        editedCategory.title = categories.value[index].title;
+        editedCategory.urlImage = categories.value[index].urlImage;
         indexEdited = index;
     }
 
     const deleteEditedCategory = () => {
         deleteCategory(editedIndex);
-        bEdited.value = false;
+        popupStore.togglePopup();
     }
 
     const updateCategory = () => {
-        categories.value[indexEdited].title = category.title;
-        categories.value[indexEdited].urlImage = category.urlImage;
-        bEdited.value= false;
+        categories.value[indexEdited].title = editedCategory.title;
+        categories.value[indexEdited].urlImage = editedCategory.urlImage;
+        popupStore.togglePopup();
     }
 
-    const cancel = ()=> {
-        bEdited.value = false;
-        category.title = '';
-        category.urlImage = '';
-    }
+    const cancel = () => popupStore.togglePopup();
 
     return {
         categories,
         category,
+        editedCategory,
         createCategory,
         deleteCategory,
         deleteEditedCategory,
         editCategory,
-        bEdited,
         updateCategory,
         cancel
     }

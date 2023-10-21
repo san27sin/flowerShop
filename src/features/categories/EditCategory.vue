@@ -5,8 +5,8 @@
         <img class="modal-photo-flower" src="@/assets/flowers.svg" alt="flowers">
       </div>
       <div class="modal-form">
-        <UiInput class="modal_form_input" v-model="categoriesStore.category.title" placeholder="имя категории"/>
-        <UiInput class="modal_form_input" v-model="categoriesStore.category.urlImage" placeholder="url картинки"/>
+        <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.title" placeholder="имя категории"/>
+        <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.urlImage" placeholder="url картинки"/>
         <div class="buttons">
           <success-button class="buttons_success" @click="categoriesStore.updateCategory()" title="Сохранить"/>
           <DangerButton class="buttons_danger" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
@@ -21,15 +21,8 @@
 import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import {useCategoriesStore} from "@/features/categories/categoriesStore";
-import {ref} from "vue";
 import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
 import SuccessButton from "@/shared/ui/SuccessButton/SuccessButton.vue";
-interface IPropse {
-  bOpenModel: boolean,
-}
-
-const test = ref(false);
-const props = defineProps<IPropse>();
 const categoriesStore = useCategoriesStore();
 </script>
 
