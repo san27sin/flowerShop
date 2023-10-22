@@ -19,11 +19,14 @@
         <input v-model="advantage.desc">
       </td>
       <td>
+        <error-list v-if="advantage.bEdited" :err-messages="errMessages"/>
+      </td>
+      <td>
         <div class="buttons">
           <button v-if="!advantage.bEdited" class="edit" @click="advantageStore.editAdvantageMode(index)">
             <img src="@/assets/deleteButton.svg" alt="">
           </button>
-          <button v-else class="edit" @click="advantageStore.commitAdvantageMode(index)">
+          <button v-else class="edit" @click="submitValidateForm(index, advantage)">
             <img src="@/assets/deleteButton.svg" alt="">
           </button>
           <button class="delete" @click="advantageStore.deleteAdvantage(index)">Х</button>
@@ -35,9 +38,27 @@
 </template>
 
 <script setup lang="ts">
-import { useAdvantageStore } from "@/features/advantage/advantagiesStore";
+import {IAdvantageSend, useAdvantageStore} from "@/features/advantage/advantagiesStore";
+import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import {ref} from "vue";
+import {Types, Validation} from "@/shared/validation";
 
 const advantageStore = useAdvantageStore();
+const errMessages = ref<string[]>([]);
+const submitValidateForm = (index: number, advantage: IAdvantageSend) => {
+  errMessages.value.splice(0,errMessages.value.length);
+  const validation = new Validation([
+    {type: Types.title, value: advantage.title},
+    {type: Types.desc, value: advantage.desc},
+  ]);
+
+  errMessages.value = validation.validate();
+
+  if (!!errMessages.value.length) {
+    return;
+  }
+  advantageStore.commitAdvantageMode(index);
+}
 </script>
 
 <style scoped lang="scss">

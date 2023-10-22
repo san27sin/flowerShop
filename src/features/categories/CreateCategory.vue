@@ -13,24 +13,19 @@ import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import {useCategoriesStore} from "@/features/categories/categoriesStore";
 import {ref} from "vue";
 import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import {Types, Validation} from "@/shared/validation";
 
 const categoriesStore = useCategoriesStore();
 const errMessages = ref<string[]>([]);
 const submitValidateForm = () => {
   errMessages.value.splice(0,errMessages.value.length);
-  if (categoriesStore.category.title.length <= 2) {
-    errMessages.value.push("Название содержит меньше 2 символов!");
-  } else if (categoriesStore.category.title.length > 15) {
-    errMessages.value.push("Название содержит больше 15 символов!");
-  }
+  const validation = new Validation([
+    {type: Types.title, value: categoriesStore.category.title},
+    {type: Types.url, value: categoriesStore.category.urlImage}
+  ]);
+  errMessages.value = validation.validate();
 
-  // Паттерн для проверки ссылки
-  const linkPattern = /^(http|https):\/\/([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/;
-  if (!linkPattern.test(categoriesStore.category.urlImage)) {
-    errMessages.value.push("Некорректная ссылка!")
-  }
-
-  if (errMessages.value.length != 0) {
+  if (!!errMessages.value.length) {
     return;
   }
 

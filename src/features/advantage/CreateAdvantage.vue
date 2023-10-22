@@ -16,37 +16,28 @@
 
 import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
-import { useAdvantageStore } from "@/features/advantage/advantagiesStore";
-import { ref } from "vue";
+import {useAdvantageStore} from "@/features/advantage/advantagiesStore";
+import {ref} from "vue";
 import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import {Types, Validation} from "@/shared/validation";
 
 const advantageStore = useAdvantageStore();
 const errMessages = ref<string[]>([]);
 const submitValidateForm = () => {
   errMessages.value.splice(0,errMessages.value.length);
-  if (advantageStore.advantage.title.length <= 2) {
-    errMessages.value.push("Название содержит меньше 2 символов!");
-  } else if (advantageStore.advantage.title.length > 15) {
-    errMessages.value.push("Название содержит больше 15 символов!");
-  }
+  const validation = new Validation([
+    {type: Types.title, value: advantageStore.advantage.title},
+    {type: Types.url, value: advantageStore.advantage.urlImage},
+    {type: Types.desc, value: advantageStore.advantage.desc},
+  ]);
 
-  if (advantageStore.advantage.desc.length < 10) {
-    errMessages.value.push("Описание содержит меньше 10 символов!");
-  } else if (advantageStore.advantage.desc.length > 200) {
-    errMessages.value.push("Описание содержит больше 200 символов!");
-  }
+  errMessages.value = validation.validate();
 
-  // Паттерн для проверки ссылки
-  const linkPattern = /^(http|https):\/\/([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/;
-  if (!linkPattern.test(advantageStore.advantage.urlImage)) {
-    errMessages.value.push("Некорректная ссылка!")
-  }
-
-  if (errMessages.value.length != 0) {
+  if (!!errMessages.value.length) {
     return;
   }
 
-  advantageStore.addAdvantage()
+  advantageStore.addAdvantage();
 }
 </script>
 

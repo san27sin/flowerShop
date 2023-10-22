@@ -19,22 +19,24 @@ import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
 import { useSocialNetworkStore } from "@/features/socialNetwork/socialNetworkStore";
 import { ref } from "vue";
 import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import { Validation, Types } from "@/shared/validation";
 
 const socialNetworkStore = useSocialNetworkStore();
 const errMessages = ref<string[]>([]);
 const submitFormValidate = () => {
   errMessages.value.splice(0,errMessages.value.length);
-  // Паттерн для проверки ссылки
-  const linkPattern = /^(http|https):\/\/([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/;
-  const incorrectUrlPhoto = socialNetworkStore.socialNetworks.find(social => !linkPattern.test(social.urlImage));
-  if (incorrectUrlPhoto) {
-    errMessages.value.push("Некорректная ссылка картинки!")
-  }
 
-  const incorrectUrlSocial = socialNetworkStore.socialNetworks.find(social => !linkPattern.test(social.urlSocialNetwork));
-  if (incorrectUrlSocial) {
-    errMessages.value.push("Некорректная ссылка соцсети!")
-  }
+  socialNetworkStore.socialNetworks.forEach(net => {
+    const validation = new Validation([
+      {type: Types.url, value: net.urlImage},
+      {type: Types.url, value: net.urlSocialNetwork}
+    ]);
+    const error = validation.validate();
+    if (!!error.length) {
+      errMessages.value.push(error[0]);
+      return;
+    }
+  })
 
   if (errMessages.value.length) return;
   socialNetworkStore.saveDateAndSendToDb();

@@ -8,10 +8,11 @@
         <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.title" placeholder="имя категории"/>
         <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.urlImage" placeholder="url картинки"/>
         <div class="buttons">
-          <success-button class="buttons_success" @click="categoriesStore.updateCategory()" title="Сохранить"/>
+          <success-button class="buttons_success" @click="submit()" title="Сохранить"/>
           <DangerButton class="buttons_danger" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
           <PrimaryButton class="buttons_close" @click="categoriesStore.cancel()" title="Закрыть"/>
         </div>
+        <error-list :err-messages="errMessages"/>
       </div>
     </div>
   </div>
@@ -23,7 +24,27 @@ import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import {useCategoriesStore} from "@/features/categories/categoriesStore";
 import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
 import SuccessButton from "@/shared/ui/SuccessButton/SuccessButton.vue";
+import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import {ref} from "vue";
+import {Types, Validation } from "@/shared/validation";
+
 const categoriesStore = useCategoriesStore();
+const errMessages = ref<string[]>([]);
+
+const submit = () => {
+  errMessages.value.splice(0,errMessages.value.length);
+  const validation = new Validation([
+    {type: Types.title, value: categoriesStore.editedCategory.title},
+    {type: Types.url, value: categoriesStore.editedCategory.urlImage}
+  ]);
+  errMessages.value = validation.validate();
+
+  if (!!errMessages.value.length) {
+    return;
+  }
+
+  categoriesStore.updateCategory();
+}
 </script>
 
 <style scoped lang="scss">

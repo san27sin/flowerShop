@@ -1,13 +1,15 @@
 <template>
-  <div class="form_phone">
+  <div class="contacts">
     <h3>Номера телефонов</h3>
-    <div class="form_phone_list" v-for="(phone, index) of phoneStore.phones" :key="phone.id">
-      <UiInput name="phone" v-model="phone.phone" placeholder="Введите номер телефона"/>
-      <PrimaryButton class="button_add button_phones_common" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
-      <danger-button class="button_del button_phones_common" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
-    </div>
-    <error-list :err-messages="errMessages"/>
-    <primary-button class="button_save button_phones_common" title="Сохранить" @click="submitFormValidate"/>
+    <form action="" class="form">
+      <template class="form_phone_list" v-for="(phone, index) of phoneStore.phones" :key="phone.id">
+        <UiInput name="phone" v-model="phone.phone" placeholder="Введите номер телефона"/>
+        <PrimaryButton class="button_add button_phones_common" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
+        <danger-button class="button_del button_phones_common" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
+      </template>
+      <error-list :err-messages="errMessages"/>
+      <primary-button class="button_save button_phones_common" title="Сохранить" @click="submitFormValidate"/>
+    </form>
   </div>
 </template>
 
@@ -16,31 +18,40 @@ import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import DangerButton from "@/shared/ui/DangerButton/DangerButton.vue";
 import {usePhoneStore} from "@/features/phones/phonesStore";
-import { ref } from "vue";
+import {ref} from "vue";
 import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
+import {Types, Validation} from "@/shared/validation";
 
 const phoneStore = usePhoneStore();
 const errMessages = ref<string[]>([]);
 
 const submitFormValidate = () => {
   errMessages.value.splice(0,errMessages.value.length);
-  const regex = /^((\+7|7|8)+([0-9]){10})$/;
-  const incorrectPhone = phoneStore.phones.find(phone => !regex.test(phone.phone));
-  if (incorrectPhone) {
-    errMessages.value.push('Некорректный номер телефона!');
-    return;
-  }
+  phoneStore.phones.forEach(phone => {
+    const validation = new Validation([
+      {type: Types.phone, value: phone.phone}
+    ])
+    const errors = validation.validate();
+    if (!!errors.length) {
+      errMessages.value = errors;
+      return;
+    }
+  })
 
+  if (!!errMessages.value.length) return;
   phoneStore.saveDateToDb();
 }
 </script>
 
 <style scoped lang="scss">
-.form_phone_list {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  height: 7vh;
+.contacts {
+  display: block;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: 15px;
 }
 
 .button_add {
