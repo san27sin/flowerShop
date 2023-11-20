@@ -1,14 +1,14 @@
 <template>
   <div class="contacts">
     <h3>Номера телефонов</h3>
-    <form action="" class="form">
-      <template class="form_phone_list" v-for="(phone, index) of phoneStore.phones" :key="phone.id">
+    <form @submit.prevent="submitFormValidate" class="form">
+      <template v-for="(phone, index) of phoneStore.phones" :key="phone.id">
         <UiInput name="phone" v-model="phone.phone" placeholder="Введите номер телефона"/>
-        <PrimaryButton class="button_add button_phones_common" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
-        <danger-button class="button_del button_phones_common" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
+        <PrimaryButton class="button_add button_phones_common" type="button" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
+        <danger-button class="button_del button_phones_common" type="button" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
       </template>
       <error-list :err-messages="errMessages"/>
-      <primary-button class="button_save button_phones_common" title="Сохранить" @click="submitFormValidate"/>
+      <primary-button class="button_save button_phones_common" title="Сохранить" type="submit"/>
     </form>
   </div>
 </template>
@@ -44,14 +44,11 @@ const submitFormValidate = () => {
 </script>
 
 <style scoped lang="scss">
-.contacts {
-  display: block;
-}
-
 .form {
   display: grid;
   grid-template-columns: 5fr 1fr;
-  gap: 15px;
+  grid-template-rows: 7vh;
+  gap: 10px;
 }
 
 .button_add {

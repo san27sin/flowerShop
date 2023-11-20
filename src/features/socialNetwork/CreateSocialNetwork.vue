@@ -50,15 +50,12 @@ const submitFormValidate = () => {
   height: 7vh;
   margin-bottom: 10px;
 }
+
 .button_social_network_common {
   color: #FFF;
   font-style: normal;
   font-weight: 700;
   line-height: 100%; /* 32px */
-}
-
-.form_social_network_list_button {
-  width: 3vw;
 }
 
 .button_add {

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
 export interface IPhone {
     id: number;
@@ -7,10 +7,10 @@ export interface IPhone {
 }
 
 export const usePhoneStore = defineStore('phone', () => {
-    const phone: IPhone = {
+    const phone: IPhone = reactive<IPhone>({
         id: new Date().getTime(),
         phone: "",
-    };
+    });
 
     const phones = ref<IPhone[]>([{...phone}]);
 
