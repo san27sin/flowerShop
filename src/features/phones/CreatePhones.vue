@@ -1,14 +1,34 @@
 <template>
   <div class="contacts">
     <h3>Номера телефонов</h3>
-    <form @submit.prevent="submitFormValidate" class="form">
+    <form @submit.prevent="submitFormValidate" class="contacts__form">
       <template v-for="(phone, index) of phoneStore.phones" :key="phone.id">
-        <UiInput name="phone" v-model="phone.phone" placeholder="Введите номер телефона"/>
-        <PrimaryButton class="button_add button_phones_common" type="button" @click="phoneStore.addInputPhone()" v-if="index === 0" title="+"/>
-        <danger-button class="button_del button_phones_common" type="button" @click="phoneStore.deleteInputPhone(index)" v-else title="x"/>
+        <UiInput
+            name="phone"
+            v-model="phone.phone"
+            placeholder="Введите номер телефона"
+        />
+        <PrimaryButton
+            class="button button_add"
+            type="button" @click="phoneStore.addInputPhone()"
+            v-if="index === 0"
+            title="+"
+        />
+        <danger-button
+            class="button button_del"
+            type="button"
+            @click="phoneStore.deleteInputPhone(index)"
+            v-else title="x"
+        />
       </template>
-      <error-list :err-messages="errMessages"/>
-      <primary-button class="button_save button_phones_common" title="Сохранить" type="submit"/>
+      <error-list
+          :err-messages="errMessages"
+          class="error"
+      />
+      <primary-button
+          class="button button_save"
+          title="Сохранить"
+          type="submit"/>
     </form>
   </div>
 </template>
@@ -44,34 +64,40 @@ const submitFormValidate = () => {
 </script>
 
 <style scoped lang="scss">
-.form {
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  grid-auto-rows: 5vh;
-  gap: 10px;
-}
+.contacts {
+  &__form {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-auto-rows: 5vh;
+    gap: 10px;
+  }
 
-.button_add {
-  height: 100%;
-  width: 3vw;
-  font-size: 32px;
-}
+  .button {
+    color: #FFF;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 32px */
 
-.button_del {
-  height: 100%;
-  width: 2vw;
-  font-size: 28px;
-}
+    &__add {
+      height: 100%;
+      width: 3vw;
+      font-size: 32px;
+    }
 
-.button_save {
-  width: 100%;
-  height: 5vh;
-}
+    &__del {
+      height: 100%;
+      width: 2vw;
+      font-size: 28px;
+    }
 
-.button_phones_common {
-  color: #FFF;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%; /* 32px */
+    &__save {
+      width: 100%;
+      height: 5vh;
+    }
+  }
+
+  .error {
+    grid-column: 1/3;
+  }
 }
 </style>
