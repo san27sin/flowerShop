@@ -47,7 +47,7 @@ const submitFormValidate = () => {
 .form {
   display: grid;
   grid-template-columns: 5fr 1fr;
-  grid-template-rows: 7vh;
+  grid-auto-rows: 5vh;
   gap: 10px;
 }
 
@@ -65,7 +65,7 @@ const submitFormValidate = () => {
 
 .button_save {
   width: 100%;
-  height: 6vh;
+  height: 5vh;
 }
 
 .button_phones_common {

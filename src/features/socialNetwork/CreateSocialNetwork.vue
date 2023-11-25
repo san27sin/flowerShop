@@ -47,7 +47,7 @@ const submitFormValidate = () => {
 .form_social_network_list {
   display: flex;
   gap: 10px;
-  height: 7vh;
+  height: 5vh;
   margin-bottom: 10px;
 }
 
@@ -72,6 +72,6 @@ const submitFormValidate = () => {
 
 .button_save {
   width: 100%;
-  height: 6vh;
+  height: 5vh;
 }
 </style>
