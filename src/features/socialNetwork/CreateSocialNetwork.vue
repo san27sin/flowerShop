@@ -1,14 +1,38 @@
 <template>
-  <div class="form_social_network">
+  <div class="social_network">
     <h3>Ссылки соцсетей</h3>
-    <div v-for="(socialNetwork, index) in socialNetworkStore.socialNetworks" :key="socialNetwork.id" class="form_social_network_list">
-      <UiInput name="picture" v-model="socialNetwork.urlImage" placeholder="Введите url картинки"/>
-      <UiInput name="social" v-model="socialNetwork.urlSocialNetwork" placeholder="Введите url соцсети"/>
-      <primary-button class="button_add button_social_network_common" @click="socialNetworkStore.createInput()" v-if="index === 0" title="+"/>
-      <DangerButton class="button_del button_social_network_common" @click="socialNetworkStore.deleteInput(index)" v-else title="x"/>
-    </div>
-    <error-list :err-messages="errMessages"/>
-    <primary-button class="button_save button_social_network_common" @click="submitFormValidate" title="Сохранить"/>
+    <form class="social_network__form">
+      <template v-for="(socialNetwork, index) in socialNetworkStore.socialNetworks" :key="socialNetwork.id">
+        <UiInput
+            name="picture"
+            v-model="socialNetwork.urlImage"
+            placeholder="Введите url картинки"
+        />
+        <UiInput
+            name="social"
+            v-model="socialNetwork.urlSocialNetwork"
+            placeholder="Введите url соцсети"
+        />
+        <primary-button
+            class="button button__add"
+            type="button"
+            @click="socialNetworkStore.createInput()"
+            v-if="index === 0"
+            title="+"/>
+        <DangerButton
+            class="button button__del"
+            type="button"
+            @click="socialNetworkStore.deleteInput(index)"
+            v-else title="x"/>
+      </template>
+      <error-list :err-messages="errMessages"/>
+      <primary-button
+          class="button button__save"
+          type="submit"
+          @click="submitFormValidate"
+          title="Сохранить"
+      />
+    </form>
   </div>
 </template>
 
@@ -44,34 +68,36 @@ const submitFormValidate = () => {
 </script>
 
 <style scoped lang="scss">
-.form_social_network_list {
-  display: flex;
-  gap: 10px;
-  height: 5vh;
-  margin-bottom: 10px;
-}
+.social_network {
+  &__form {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 0.2fr;
+    grid-auto-rows: 5vh;
+    margin-bottom: 10px;
+  }
 
-.button_social_network_common {
-  color: #FFF;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%; /* 32px */
-}
+  .button {
+    color: #FFF;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 32px */
 
-.button_add {
-  height: 100%;
-  width: 3vw;
-  font-size: 32px;
-}
+    &__add {
+      height: 100%;
+      width: 3vw;
+      font-size: 32px;
+    }
 
-.button_del {
-  height: 100%;
-  width: 2vw;
-  font-size: 28px;
-}
+    &__del {
+      height: 100%;
+      width: 2vw;
+      font-size: 28px;
+    }
 
-.button_save {
-  width: 100%;
-  height: 5vh;
+    &__save {
+      grid-column: 1/3;
+    }
+  }
 }
 </style>
