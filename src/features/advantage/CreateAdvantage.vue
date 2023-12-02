@@ -1,12 +1,35 @@
 <template>
-  <form action="" class="form" @submit.prevent="submitValidateForm()">
-    <div class="up">
-      <UiInput class="input_advance_up" name="name" v-model="advantageStore.advantage.title" placeholder="Введите название преимущества"/>
-      <UiInput class="input_advance_up" name="url" v-model="advantageStore.advantage.urlImage" placeholder="Введите url картинки"/>
-      <PrimaryButton class="button_create" title="Создать"/>
+  <form
+      action=""
+      class="form"
+      @submit.prevent="submitValidateForm()"
+  >
+    <div class="form__top">
+      <UiInput
+          class="form__top__input"
+          name="name"
+          v-model="advantageStore.advantage.title"
+          placeholder="Введите название преимущества"
+      />
+      <UiInput
+          class="form__top__input"
+          name="url"
+          v-model="advantageStore.advantage.urlImage"
+          placeholder="Введите url картинки"
+      />
+      <PrimaryButton
+          class="button"
+          title="Создать"
+          type="submit"
+      />
     </div>
-    <div class="down">
-      <UiInput class="input_advance_down" name="desc" v-model="advantageStore.advantage.desc" placeholder="Введите описание"/>
+    <div class="form__bottom">
+      <UiInput
+          class="form__bottom__input"
+          name="desc"
+          v-model="advantageStore.advantage.desc"
+          placeholder="Введите описание"
+      />
     </div>
   </form>
   <ErrorList :err-messages="errMessages"/>
@@ -46,26 +69,28 @@ const submitValidateForm = () => {
   display: grid;
   grid-template-rows: 1fr 1fr;
   width: 64vw;
-}
 
-.up {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
+  &__top {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 
-.button_create {
-  width: 18%;
-  height: 70%;
-}
+    &__input {
+      width: 35%;
+      height: 70%;
+    }
+  }
 
-.input_advance_up {
-  width: 35%;
-  height: 70%;
-}
+  &__bottom {
+    &__input {
+      width: 100%;
+      height: 70%;
+    }
+  }
 
-.input_advance_down {
-  width: 100%;
-  height: 70%;
+  .button {
+    width: 18%;
+    height: 70%;
+  }
 }
 </style>

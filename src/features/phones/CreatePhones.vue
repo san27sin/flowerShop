@@ -10,7 +10,8 @@
         />
         <PrimaryButton
             class="button button_add"
-            type="button" @click="phoneStore.addInputPhone()"
+            type="button"
+            @click="phoneStore.addInputPhone()"
             v-if="index === 0"
             title="+"
         />
