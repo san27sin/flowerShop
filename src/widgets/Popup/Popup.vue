@@ -1,10 +1,12 @@
-<template  v-show="popupStore.isVisible">
-  <div :class="{'popup__active': popupStore.isVisible }" class="popup">
-    <div @click="popupStore.togglePopup()" class="bg"></div>
-    <div class="window">
-      <slot/>
+<template>
+  <transition name="appear">
+    <div v-show="popupStore.isVisible" :class="{'popup__active': popupStore.isVisible }" class="popup">
+      <div @click="popupStore.togglePopup()" class="bg"></div>
+      <div class="window">
+        <slot/>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
@@ -46,5 +48,16 @@ const popupStore = usePopupStore()
     background-color: #fff;
     padding: 60px;
     position: relative;
+  }
+
+  .appear-enter-active,
+  .appear-leave-active {
+    transition: transform 1s;
+    transform: scale(1.25);
+  }
+
+  .appear-enter-from,
+  .appear-leave-to {
+    transform: scale(0.25);
   }
 </style>
