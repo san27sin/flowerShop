@@ -1,8 +1,23 @@
 <template>
-  <form class="form" @submit.prevent="submitValidateForm()">
-    <UiInput class="input_category" v-model="categoriesStore.category.title" placeholder="Введите имя категории"/>
-    <UiInput class="input_category" v-model="categoriesStore.category.urlImage" placeholder="Введите url картинки"/>
-    <PrimaryButton class="button_primary" title="Создать"/>
+  <form
+      class="form"
+      @submit.prevent="submitValidateForm()"
+  >
+    <UiInput
+        class="form__input"
+        v-model="categoriesStore.category.title"
+        placeholder="Введите имя категории"
+    />
+    <UiInput
+        class="form__input"
+        v-model="categoriesStore.category.urlImage"
+        placeholder="Введите url картинки"
+    />
+    <PrimaryButton
+        class="form__button"
+        title="Создать"
+        type="submit"
+    />
   </form>
   <error-list :err-messages="errMessages"/>
 </template>
@@ -33,19 +48,19 @@ const submitValidateForm = () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .form {
   display: flex;
   gap: 23px;
-}
 
-.input_category {
-  width: 35%;
-  height: 70%;
-}
+  &__input {
+    width: 35%;
+    height: 70%;
+  }
 
-.button_primary {
-  width: 15%;
-  height: 70%;
+  &__button {
+    width: 15%;
+    height: 70%;
+  }
 }
 </style>
