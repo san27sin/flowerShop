@@ -10,7 +10,7 @@
     />
     <UiInput
         class="form__input"
-        v-model="categoriesStore.category.urlImage"
+        v-model="categoriesStore.category.url"
         placeholder="Введите url картинки"
     />
     <PrimaryButton
@@ -36,7 +36,7 @@ const submitValidateForm = () => {
   errMessages.value.splice(0,errMessages.value.length);
   const validation = new Validation([
     {type: Types.title, value: categoriesStore.category.title},
-    {type: Types.url, value: categoriesStore.category.urlImage}
+    {type: Types.url, value: categoriesStore.category.url}
   ]);
   errMessages.value = validation.validate();
 
