@@ -1,13 +1,16 @@
 import { defineStore } from "pinia";
 import {reactive, ref} from "vue";
 import {usePopupStore} from "@/features/popup/popupStore";
+import { instance } from '@/shared/axios/index'
 
 export interface ICategorySend {
+    id: number;
     title: string;
-    urlImage: string;
+    url: string;
 }
 
 export const useCategoriesStore = defineStore('categories', () => {
+    
     const popupStore = usePopupStore();
     const categories = ref<ICategorySend[]>([]);
 
@@ -15,31 +18,47 @@ export const useCategoriesStore = defineStore('categories', () => {
     let editedIndex = -1;
 
     const category: ICategorySend = reactive<ICategorySend>({
+        id: -1,
         title: "",
-        urlImage:""
+        url:""
     })
 
     const editedCategory: ICategorySend = reactive<ICategorySend>({
+        id: -1,
         title: "",
-        urlImage:""
+        url:""
     })
 
-    const createCategory = () => {
-        categories.value.push({...category});
-        category.title = ''
-        category.urlImage = ''
+    const createCategory = async () => {
+        try {
+            const { data } = await instance.post('categories', category)
+            category.id = data.id
+            categories.value.push({...category});
+        } catch (e) {
+            console.log(e)
+        } finally {
+            category.id = -1
+            category.title = ''
+            category.url = ''
+        }
     }
 
-    const deleteCategory = (index: number) => {
-        categories.value.splice(index,1);
+    const deleteCategory = async (index: number) => {
+        try {
+            const delCategory = categories.value.splice(index,1)
+            await instance.delete(`categories/${delCategory[0].id}`)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const editCategory = (index: number) => {
-        popupStore.togglePopup();
-        editedIndex = index;
-        editedCategory.title = categories.value[index].title;
-        editedCategory.urlImage = categories.value[index].urlImage;
-        indexEdited = index;
+        popupStore.togglePopup()
+        editedIndex = index
+        editedCategory.id = categories.value[index].id
+        editedCategory.title = categories.value[index].title
+        editedCategory.url = categories.value[index].url
+        indexEdited = index
     }
 
     const deleteEditedCategory = () => {
@@ -47,14 +66,29 @@ export const useCategoriesStore = defineStore('categories', () => {
         popupStore.togglePopup();
     }
 
-    const updateCategory = () => {
-        categories.value[indexEdited].title = editedCategory.title;
-        categories.value[indexEdited].urlImage = editedCategory.urlImage;
-        popupStore.togglePopup();
+    const updateCategory = async () => {
+        try {
+            categories.value[indexEdited].title = editedCategory.title;
+            categories.value[indexEdited].url = editedCategory.url;
+            await instance.patch(`categories`, editedCategory)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            popupStore.togglePopup();
+        }
     }
 
     const cancel = () => popupStore.togglePopup();
-
+    
+    const getAll = async ():Promise<void> => {
+        try {
+            const { data } =  await instance.get('categories')
+            categories.value = data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    
     return {
         categories,
         category,
@@ -64,6 +98,7 @@ export const useCategoriesStore = defineStore('categories', () => {
         deleteEditedCategory,
         editCategory,
         updateCategory,
-        cancel
+        cancel,
+        getAll
     }
 })

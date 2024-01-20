@@ -24,9 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import {useCategoriesStore} from "@/features/categories/categoriesStore";
+import { useCategoriesStore } from "@/features/categories/categoriesStore";
 
 const categoriesStore = useCategoriesStore();
+categoriesStore.getAll();
 </script>
 
 <style scoped lang="scss">

@@ -44,6 +44,8 @@ import {ref} from "vue";
 import {Types, Validation} from "@/shared/validation";
 
 const advantageStore = useAdvantageStore();
+advantageStore.getAll()
+
 const errMessages = ref<string[]>([]);
 const submitValidateForm = (index: number, advantage: IAdvantageSend) => {
   errMessages.value.splice(0,errMessages.value.length);

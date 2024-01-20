@@ -6,7 +6,7 @@
       </div>
       <div class="modal-form">
         <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.title" placeholder="имя категории"/>
-        <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.urlImage" placeholder="url картинки"/>
+        <UiInput class="modal_form_input" v-model="categoriesStore.editedCategory.url" placeholder="url картинки"/>
         <div class="buttons">
           <success-button class="buttons_success" @click="submit()" title="Сохранить"/>
           <DangerButton class="buttons_danger" @click="categoriesStore.deleteEditedCategory()" title="Удалить"/>
@@ -35,7 +35,7 @@ const submit = () => {
   errMessages.value.splice(0,errMessages.value.length);
   const validation = new Validation([
     {type: Types.title, value: categoriesStore.editedCategory.title},
-    {type: Types.url, value: categoriesStore.editedCategory.urlImage}
+    {type: Types.url, value: categoriesStore.editedCategory.url}
   ]);
   errMessages.value = validation.validate();
 
