@@ -11,12 +11,12 @@
     <tr v-for="(advantage, index) of advantageStore.advantages" :key="advantage">
       <th scope="row">{{ index + 1 }}</th>
       <td v-if="!advantage.bEdited">{{advantage.title}}</td>
-      <td v-if="!advantage.bEdited">{{advantage.desc}}</td>
+      <td v-if="!advantage.bEdited">{{ advantage.description }}</td>
       <td v-if="advantage.bEdited">
         <input v-model="advantage.title">
       </td>
       <td v-if="advantage.bEdited">
-        <input v-model="advantage.desc">
+        <input v-model="advantage.description">
       </td>
       <td>
         <error-list v-if="advantage.bEdited" :err-messages="errMessages"/>
@@ -51,7 +51,7 @@ const submitValidateForm = (index: number, advantage: IAdvantageSend) => {
   errMessages.value.splice(0,errMessages.value.length);
   const validation = new Validation([
     {type: Types.title, value: advantage.title},
-    {type: Types.desc, value: advantage.desc},
+    {type: Types.desc, value: advantage.description},
   ]);
 
   errMessages.value = validation.validate();

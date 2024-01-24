@@ -29,7 +29,8 @@
       <primary-button
           class="button button_save"
           title="Сохранить"
-          type="submit"/>
+          type="submit"
+      />
     </form>
   </div>
 </template>
@@ -44,6 +45,7 @@ import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
 import {Types, Validation} from "@/shared/validation";
 
 const phoneStore = usePhoneStore();
+phoneStore.getAll()
 const errMessages = ref<string[]>([]);
 
 const submitFormValidate = () => {

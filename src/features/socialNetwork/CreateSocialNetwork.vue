@@ -5,12 +5,12 @@
       <template v-for="(socialNetwork, index) in socialNetworkStore.socialNetworks" :key="socialNetwork.id">
         <UiInput
             name="picture"
-            v-model="socialNetwork.urlImage"
+            v-model="socialNetwork.urlPicture"
             placeholder="Введите url картинки"
         />
         <UiInput
             name="social"
-            v-model="socialNetwork.urlSocialNetwork"
+            v-model="socialNetwork.urlSocialNet"
             placeholder="Введите url соцсети"
         />
         <primary-button
@@ -46,14 +46,15 @@ import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
 import { Validation, Types } from "@/shared/validation";
 
 const socialNetworkStore = useSocialNetworkStore();
+socialNetworkStore.getAll()
 const errMessages = ref<string[]>([]);
 const submitFormValidate = () => {
   errMessages.value.splice(0,errMessages.value.length);
 
   socialNetworkStore.socialNetworks.forEach(net => {
     const validation = new Validation([
-      {type: Types.url, value: net.urlImage},
-      {type: Types.url, value: net.urlSocialNetwork}
+      {type: Types.url, value: net.urlPicture},
+      {type: Types.url, value: net.urlSocialNet}
     ]);
     const error = validation.validate();
     if (!!error.length) {

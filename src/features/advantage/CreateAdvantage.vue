@@ -14,7 +14,7 @@
       <UiInput
           class="form__top__input"
           name="url"
-          v-model="advantageStore.advantage.urlImage"
+          v-model="advantageStore.advantage.url"
           placeholder="Введите url картинки"
       />
       <PrimaryButton
@@ -27,7 +27,7 @@
       <UiInput
           class="form__bottom__input"
           name="desc"
-          v-model="advantageStore.advantage.desc"
+          v-model="advantageStore.advantage.description"
           placeholder="Введите описание"
       />
     </div>
@@ -50,8 +50,8 @@ const submitValidateForm = () => {
   errMessages.value.splice(0,errMessages.value.length);
   const validation = new Validation([
     {type: Types.title, value: advantageStore.advantage.title},
-    {type: Types.url, value: advantageStore.advantage.urlImage},
-    {type: Types.desc, value: advantageStore.advantage.desc},
+    {type: Types.url, value: advantageStore.advantage.url},
+    {type: Types.desc, value: advantageStore.advantage.description},
   ]);
 
   errMessages.value = validation.validate();

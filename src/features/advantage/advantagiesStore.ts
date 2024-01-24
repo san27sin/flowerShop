@@ -5,8 +5,8 @@ import {instance} from "@/shared/axios";
 export interface IAdvantageSend {
     id: number,
     title: string;
-    desc: string;
-    urlImage: string;
+    description: string;
+    url: string;
     bEdited: boolean;
 }
 
@@ -14,8 +14,8 @@ export const useAdvantageStore = defineStore('advantage', () => {
     const advantage: IAdvantageSend = reactive<IAdvantageSend>({
         id: -1,
         title: "",
-        desc: "",
-        urlImage: "",
+        description: "",
+        url: "",
         bEdited: false,
     });
 
@@ -28,8 +28,8 @@ export const useAdvantageStore = defineStore('advantage', () => {
             advantages.value.push({
                 id: advantage.id,
                 title: advantage.title,
-                desc: advantage.desc,
-                urlImage: advantage.urlImage,
+                description: advantage.description,
+                url: advantage.url,
                 bEdited: advantage.bEdited,
             });
         } catch (e) {
@@ -37,8 +37,8 @@ export const useAdvantageStore = defineStore('advantage', () => {
         } finally {
             advantage.id = -1
             advantage.title = ""
-            advantage.desc = ""
-            advantage.urlImage = ""
+            advantage.description = ""
+            advantage.url = ""
         }
     }
 
@@ -52,13 +52,18 @@ export const useAdvantageStore = defineStore('advantage', () => {
     }
 
     const editAdvantageMode = (ixd: number) => {
-        const adv = advantages.value[ixd];
+        const adv = advantages.value[ixd]
         adv.bEdited = true;
     }
 
-    const commitAdvantageMode = (ixd: number) => {
-        const adv = advantages.value[ixd];
-        adv.bEdited = false;
+    const commitAdvantageMode = async (ixd: number) => {
+        const adv = advantages.value[ixd]
+        adv.bEdited = false
+        try {
+            await instance.patch('advantages', adv)
+        } catch (e) {
+            console.log(e)
+        }
     }
     
     const getAll = async () => {
