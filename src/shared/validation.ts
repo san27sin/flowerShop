@@ -6,6 +6,9 @@ export enum Types {
     desc,
     url,
     phone,
+    password,
+    email,
+    nickname
 }
 
 /**
@@ -17,7 +20,10 @@ export class Validation {
         [Types.title]: this.validateTitle,
         [Types.desc]: this.validateDesc,
         [Types.url]: this.validateUrl,
-        [Types.phone]: this.validatePhoneNumber
+        [Types.phone]: this.validatePhoneNumber,
+        [Types.password]: this.validatePassword,
+        [Types.email]: this.validateEmail,
+        [Types.nickname]: this.validateNickname
     }
 
     constructor(inputs: { type: Types; value: string }[]) {
@@ -59,6 +65,30 @@ export class Validation {
     private validatePhoneNumber(phone: string) {
         return Validation.validationClientError([
             {condition: !/^((\+7|7|8)+([0-9]){10})$/.test(phone), message: 'Некорректный номер телефона!'}
+        ])
+    }
+    
+    private validatePassword(password: string) { // "Abcdefg1"
+        return Validation.validationClientError([
+            {condition: !/.{8,}/.test(password), message: "Минимальная длина пароля 8 символов"},
+            {condition: !/.*\d.*/.test(password), message: "В пароле должна быть одна цифра"},
+            {condition: !/.*[a-z].*/.test(password), message: "В пароле должна быть хотя бы одна буква в нижнем регистре"},
+            {condition: !/.*[A-Z].*/.test(password), message: "В пароле должна быть хотя бы одна буква в верхнем регистре"}
+        ])
+    }
+    
+    private validateEmail(email: string) {
+        return Validation.validationClientError([
+            {condition: !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email), message: "email невалидный"}
+        ])
+    }
+    
+    private validateNickname(nickname: string) {
+        return Validation.validationClientError([
+            {
+                condition: !/^[a-zA-Z0-9_-]{3,20}$/.test(nickname),
+                message: "Nickname невалиден. Никнейм должен содержать только буквы, цифры, подчеркивания и дефисы, и иметь длину от 3 до 20 символов."
+            }
         ])
     }
 

@@ -1,6 +1,5 @@
 <template>
   <form
-      action=""
       class="form"
       @submit.prevent="submitValidateForm()"
   >
@@ -36,7 +35,6 @@
 </template>
 
 <script setup lang="ts">
-
 import UiInput from "@/shared/ui/UiInput/UiInput.vue";
 import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue";
 import {useAdvantageStore} from "@/features/advantage/advantagiesStore";
