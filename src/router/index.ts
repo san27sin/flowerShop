@@ -8,6 +8,11 @@ const routes: Array<RouteRecordRaw> = [
         component: HomeView,
     },
     {
+        path: '/auth',
+        name: 'auth',
+        component: () => import('../pages/AuthView.vue')
+    },
+    {
         path: '/categories',
         name: 'categories',
         component: () => import('../pages/CategoryView.vue')
