@@ -1,7 +1,6 @@
 <template>
   <form
     class="form"
-    action=""
     @submit.prevent="submitForm"
   >
     <img src="@/assets/Logo.svg" alt="">
@@ -10,6 +9,7 @@
     <UiInput placeholder="password"  v-model="authStore.authorizationForm.password"/>
     <PrimaryButton title="Зарегистрироваться"/>
   </form>
+  <ErrorList :err-messages="errMessages"/>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +18,7 @@ import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue"
 import {useAuthStore} from '@/features/auth/authStore'
 import {ref} from "vue"
 import {Types, Validation} from "@/shared/validation"
+import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue"
 
 const authStore = useAuthStore()
 const errMessages = ref<string[]>([])

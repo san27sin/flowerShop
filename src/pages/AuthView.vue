@@ -10,7 +10,6 @@
 import { ref, computed } from 'vue'
 import AuthorizationForm from '@/widgets/AuthorizationForm/AuthorizationForm.vue'
 import LoginForm from '@/widgets/LoginForm/LoginForm.vue'
-import { useAuthStore } from '@/features/auth/authStore'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const title = ref('LoginForm')

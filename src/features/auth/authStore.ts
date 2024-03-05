@@ -40,11 +40,22 @@ export const useAuthStore = defineStore('auth', () => {
 		localStorage.setItem('accessToken', token)
 	}
 	
+	function logoutUser() {
+		localStorage.removeItem('accessToken')
+		document.cookie = ''
+		isAuth.value = false
+	}
+	
+	function clearData() {
+	
+	}
+	
 	return {
 		isAuth,
 		authorizationForm,
 		loginForm,
 		register,
 		login,
+		logoutUser
 	}
 })

@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from "@/pages/HomeView.vue";
+import {useAuthStore} from "@/features/auth/authStore";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -33,5 +34,12 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes,
 });
+
+router.beforeEach((to, name) => {
+    const authStore = useAuthStore()
+    if (to.name === 'home' && localStorage.getItem('accessToken')) {
+    
+    }
+})
 
 export default router;

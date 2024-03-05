@@ -5,7 +5,7 @@
     <RouterView class="app__content"/>
   </div>
   <div v-else class="login">
-    <AuthView/>
+    <router-view/>
   </div>
 </template>
 

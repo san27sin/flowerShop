@@ -5,7 +5,7 @@
         <img src="@/assets/Logo.svg" alt="">
       </router-link>
 
-      <secondary-button class="button_exit" title="Выйти"/>
+      <LogoutUser/>
     </div>
   </header>
 </template>
@@ -13,9 +13,10 @@
 <script>
 import SecondaryButton from "@/shared/ui/SecondaryButton/SecondaryButton.vue";
 import {defineComponent} from "vue";
+import LogoutUser from "@/features/auth/components/LogoutUser.vue";
 
 export default defineComponent({
-  components: {SecondaryButton}
+  components: {LogoutUser, SecondaryButton}
 })
 
 
