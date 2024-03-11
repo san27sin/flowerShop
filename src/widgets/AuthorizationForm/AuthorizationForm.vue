@@ -8,7 +8,7 @@
     <UiInput placeholder="email"  v-model="authStore.authorizationForm.email"/>
     <UiInput placeholder="nickname"  v-model="authStore.authorizationForm.nickname"/>
     <UiInput placeholder="password"  v-model="authStore.authorizationForm.password"/>
-    <PrimaryButton title="Зарегистрироваться"/>
+    <PrimaryButton title="Зарегистрироваться" type="submit"/>
   </form>
 </template>
 
