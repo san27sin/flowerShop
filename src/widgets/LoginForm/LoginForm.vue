@@ -1,8 +1,8 @@
 <template>
   <form class="form" @submit.prevent="submitForm">
-    <img class="form__logo" src="@/assets/Logo.svg" alt="">
-    <UiInput placeholder="email" model-value=""/>
-    <UiInput placeholder="password" model-value=""/>
+    <img class="form__logo" src="@/assets/Logo.svg">
+    <UiInput placeholder="email" v-model="authStore.loginForm.email"/>
+    <UiInput placeholder="password" v-model="authStore.loginForm.password"/>
     <PrimaryButton title="Войти" type="submit"/>
   </form>
 </template>
@@ -21,6 +21,7 @@ const route = useRoute()
 const errMessages = ref<string[]>([])
 
 function submitForm() {
+  console.log('submit')
   errMessages.value.splice(0,errMessages.value.length);
 
   const validation = new Validation([
@@ -33,8 +34,19 @@ function submitForm() {
   if (!!errMessages.value.length) {
     return;
   }
+  // const validation = new Validation([
+  //   { type: Types.password, value: authStore.loginForm.password },
+  //   { type: Types.email, value: authStore.loginForm.email },
+  // ])
+  //
+  // errMessages.value = validation.validate();
+  //
+  // if (!!errMessages.value.length) {
+  //   return;
+  // }
 
   authStore.login()
+  router.push('/')
 }
 </script>
 

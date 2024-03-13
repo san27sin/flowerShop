@@ -11,7 +11,6 @@ export const useAuthStore = defineStore('auth', () => {
 		nickname: '',
 		password: '',
 	})
-	
 	const loginForm = reactive({
 		email: '',
 		password: ''

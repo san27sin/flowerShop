@@ -1,10 +1,6 @@
 <template>
-  <form
-    class="form"
-    action=""
-    @submit.prevent="submitForm"
-  >
-    <img src="@/assets/Logo.svg" alt="">
+  <form class="form" @submit.prevent="submitForm">
+    <img src="@/assets/Logo.svg">
     <UiInput placeholder="email"  v-model="authStore.authorizationForm.email"/>
     <UiInput placeholder="nickname"  v-model="authStore.authorizationForm.nickname"/>
     <UiInput placeholder="password"  v-model="authStore.authorizationForm.password"/>
