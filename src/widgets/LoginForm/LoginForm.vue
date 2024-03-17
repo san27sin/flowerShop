@@ -21,19 +21,10 @@ const route = useRoute()
 const errMessages = ref<string[]>([])
 
 function submitForm() {
-  console.log('submit')
+  console.log('debbuger')
+  debugger 
   errMessages.value.splice(0,errMessages.value.length);
 
-  const validation = new Validation([
-    { type: Types.password, value: authStore.authorizationForm.password },
-    { type: Types.email, value: authStore.authorizationForm.email },
-  ])
-
-  errMessages.value = validation.validate();
-
-  if (!!errMessages.value.length) {
-    return;
-  }
   // const validation = new Validation([
   //   { type: Types.password, value: authStore.loginForm.password },
   //   { type: Types.email, value: authStore.loginForm.email },
