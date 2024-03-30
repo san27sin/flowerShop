@@ -6,6 +6,7 @@ import { useRouter } from "vue-router"
 export const useAuthStore = defineStore('auth', () => {
 	const isAuth = ref(false)
 	const router = useRouter()
+	const message = ref('')
 	const authorizationForm = reactive({
 		email: '',
 		nickname: '',
@@ -34,6 +35,15 @@ export const useAuthStore = defineStore('auth', () => {
 			console.log(e)
 		}
 	}
+
+	async function activateUser(key: string) {
+		try {
+			await instance.patch(`/auth/activate/${key}`)
+			message.value = 'Активация прошла успешна, можете войти в свой ЛК'
+		} catch (e) {
+			message.value = 'Активация не удалась'
+		}
+	}
 	
 	function setLocalStorage(token: string) {
 		localStorage.setItem('accessToken', token)
@@ -45,5 +55,7 @@ export const useAuthStore = defineStore('auth', () => {
 		loginForm,
 		register,
 		login,
+		activateUser,
+		message
 	}
 })

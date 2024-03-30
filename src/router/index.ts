@@ -27,6 +27,16 @@ const routes: Array<RouteRecordRaw> = [
         name: 'contacts',
         component: () => import('../pages/ContactsView.vue')
     },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('../pages/LoginView.vue')
+    },
+    {
+        path: '/activate/:key',
+        name: 'activate',
+        component: () => import('../pages/ActivationView.vue')
+    }
 ];
 
 const router = createRouter({

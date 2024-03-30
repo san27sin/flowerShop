@@ -20,6 +20,7 @@ const errMessages = ref<string[]>([])
 
 function submitForm() {
   errMessages.value.splice(0,errMessages.value.length);
+  console.log('authorization')
 
   const validation = new Validation([
     { type: Types.password, value: authStore.authorizationForm.password },

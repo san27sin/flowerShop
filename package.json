@@ -16,13 +16,14 @@
     "serve": "^14.2.1",
     "vue": "^3.2.13",
     "vue-loader": "^17.2.2",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "webpack": "^5.91.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
+    "@vue/cli-service": "^5.0.8",
     "cypress": "^13.3.0",
     "sass": "^1.67.0",
     "sass-loader": "^13.3.2",
