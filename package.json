@@ -7,6 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "axios": "^1.5.0",
     "core-js": "^3.8.3",
     "npm": "^10.2.1",
@@ -14,16 +19,11 @@
     "run": "^1.4.0",
     "scss-loader": "^0.0.1",
     "serve": "^14.2.1",
-    "vue": "^3.2.13",
+    "vue": "^3.4.21",
     "vue-loader": "^17.2.2",
-    "vue-router": "^4.0.3",
-    "webpack": "^5.91.0"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-service": "^5.0.8",
     "cypress": "^13.3.0",
     "sass": "^1.67.0",
     "sass-loader": "^13.3.2",

@@ -5,6 +5,7 @@
     <UiInput placeholder="nickname"  v-model="authStore.authorizationForm.nickname"/>
     <UiInput placeholder="password"  v-model="authStore.authorizationForm.password"/>
     <PrimaryButton title="Зарегистрироваться" type="submit"/>
+    <ErrorList :err-messages="errMessages"/>
   </form>
 </template>
 
@@ -14,13 +15,13 @@ import PrimaryButton from "@/shared/ui/PrimaryButton/PrimaryButton.vue"
 import {useAuthStore} from '@/features/auth/authStore'
 import {ref} from "vue"
 import {Types, Validation} from "@/shared/validation"
+import ErrorList from "@/shared/ui/ErrorList/ErrorList.vue";
 
 const authStore = useAuthStore()
 const errMessages = ref<string[]>([])
 
 function submitForm() {
   errMessages.value.splice(0,errMessages.value.length);
-  console.log('authorization')
 
   const validation = new Validation([
     { type: Types.password, value: authStore.authorizationForm.password },

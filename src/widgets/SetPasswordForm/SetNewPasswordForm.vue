@@ -1,9 +1,9 @@
 <template>
   <form class="form" @submit.prevent="submitForm">
     <img class="form__logo" src="@/assets/Logo.svg">
-    <UiInput placeholder="email" v-model="authStore.loginForm.email"/>
-    <UiInput placeholder="password" type="password" v-model="authStore.loginForm.password"/>
-    <PrimaryButton title="Войти" type="submit"/>
+    <UiInput placeholder="password" v-model="authStore.newPassword"/>
+    <UiInput placeholder="password" v-model="confirmNewPassword"/>
+    <PrimaryButton title="Сбросить пароль" type="submit"/>
   </form>
   <ErrorList :err-messages="errMessages"/>
 </template>
@@ -21,26 +21,19 @@ const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
 const errMessages = ref<string[]>([])
-
+const confirmNewPassword = ref('')
 async function submitForm() {
-  errMessages.value.splice(0,errMessages.value.length);
-
-  const validation = new Validation([
-    { type: Types.password, value: authStore.loginForm.password },
-    { type: Types.email, value: authStore.loginForm.email },
-  ])
-
-  errMessages.value = validation.validate();
-
-  console.log(errMessages.value)
-  if (errMessages.value.length) {
-    return;
+  if (authStore.newPassword === confirmNewPassword.value) {
+    errMessages.value.push('Пароли не совпадают!')
+    return
   }
 
-  const response = await authStore.login()
-  if (response)
+  const response = await authStore.sendNewPassword()
+  if (response) {
     errMessages.value.push(response)
-  router.push('/')
+    return
+  }
+  router.push('/login')
 }
 </script>
 

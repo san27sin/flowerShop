@@ -13,6 +13,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/AuthView.vue')
     },
     {
+        path: '/set-password/:token',
+        name: 'set-password',
+        component: () => import('../pages/SetNewPasswordView.vue')
+    },
+    {
         path: '/categories',
         name: 'categories',
         component: () => import('../pages/CategoryView.vue')
