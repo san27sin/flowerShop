@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from "@/pages/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/auth',
         name: 'auth',
         component: () => import('../pages/AuthView.vue')
+    },
+    {
+        path: '/set-password/:token',
+        name: 'set-password',
+        component: () => import('../pages/SetNewPasswordView.vue')
     },
     {
         path: '/categories',
@@ -27,10 +32,20 @@ const routes: Array<RouteRecordRaw> = [
         name: 'contacts',
         component: () => import('../pages/ContactsView.vue')
     },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('../pages/LoginView.vue')
+    },
+    {
+        path: '/activate/:key',
+        name: 'activate',
+        component: () => import('../pages/ActivationView.vue')
+    }
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 });
 

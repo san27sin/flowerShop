@@ -1,9 +1,8 @@
 <template>
   <form class="form" @submit.prevent="submitForm">
     <img class="form__logo" src="@/assets/Logo.svg">
-    <UiInput placeholder="email" v-model="authStore.loginForm.email"/>
-    <UiInput placeholder="password" type="password" v-model="authStore.loginForm.password"/>
-    <PrimaryButton title="Войти" type="submit"/>
+    <UiInput placeholder="email" v-model="authStore.resetPasswordForm.email"/>
+    <PrimaryButton title="Сбросить пароль" type="submit"/>
   </form>
   <ErrorList :err-messages="errMessages"/>
 </template>
@@ -25,10 +24,7 @@ const errMessages = ref<string[]>([])
 async function submitForm() {
   errMessages.value.splice(0,errMessages.value.length);
 
-  const validation = new Validation([
-    { type: Types.password, value: authStore.loginForm.password },
-    { type: Types.email, value: authStore.loginForm.email },
-  ])
+  const validation = new Validation([{ type: Types.email, value: authStore.resetPasswordForm.email }])
 
   errMessages.value = validation.validate();
 
@@ -37,10 +33,10 @@ async function submitForm() {
     return;
   }
 
-  const response = await authStore.login()
+  const response = await authStore.resetPassword()
   if (response)
     errMessages.value.push(response)
-  router.push('/')
+  router.push('/login')
 }
 </script>
 

@@ -1,24 +1,19 @@
 <template>
   <header class="header">
-    <div class="container d-grid">
-      <router-link to="/" class="logo">
+    <div class="container">
+      <router-link to="/" class="container__logo">
         <img src="@/assets/Logo.svg" alt="">
       </router-link>
-
-      <secondary-button class="button_exit" title="Выйти"/>
+      <secondary-button title="Выйти" class="container__button" @click="authStore.logout()"/>
     </div>
   </header>
 </template>
 
-<script>
+<script setup lang="ts">
+import { useAuthStore } from '@/features/auth/authStore'
 import SecondaryButton from "@/shared/ui/SecondaryButton/SecondaryButton.vue";
-import {defineComponent} from "vue";
 
-export default defineComponent({
-  components: {SecondaryButton}
-})
-
-
+const authStore = useAuthStore()
 </script>
 
 <style lang="scss" scoped>
@@ -27,15 +22,21 @@ export default defineComponent({
     padding: 20px 0;
   }
 
-  .d-grid {
-    display: grid;
-    grid-template-columns: 175px max-content;
-    align-items: center;
+  .container {
+    display: flex;
+    width: 100%;
     justify-content: space-between;
-  }
+    align-items: center;
+    padding: 0 10px; /* Добавляем небольшой отступ от краев */
 
-  .button_exit {
-    width: 10vw;
-    height: 4hw;
+    &__logo {
+      margin-right: auto; /* Логотип прижимается к левому краю */
+    }
+
+    &__button {
+      margin-left: auto; /* Кнопка прижимается к правому краю */
+      margin-right: 5px; /* Небольшой отступ между кнопкой и логотипом */
+      width: 100px;
+    }
   }
 </style>

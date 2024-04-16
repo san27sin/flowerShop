@@ -5,7 +5,7 @@
     <RouterView class="app__content"/>
   </div>
   <div v-else class="login">
-    <AuthView/>
+    <RouterView class="app__content"/>
   </div>
 </template>
 
@@ -14,6 +14,8 @@ import Header from '@/widgets/Header/Header.vue'
 import Menu from '@/widgets/Menu/Menu.vue'
 import { useAuthStore } from '@/features/auth/authStore'
 import AuthView from '@/pages/AuthView.vue'
+import SetPasswordView from "@/pages/SetPasswordView.vue";
+import SetNewPasswordView from "@/pages/SetNewPasswordView.vue";
 
 const authStore = useAuthStore()
 const getTitle = (): string => {

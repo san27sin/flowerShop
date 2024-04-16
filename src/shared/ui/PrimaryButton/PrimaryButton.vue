@@ -6,9 +6,13 @@
 
 <script setup lang="ts">
 interface IProps {
-    title: String;
+    title: String
+    isActive: boolean
 }
-const props = defineProps<IProps>();
+const props = withDefaults(defineProps<IProps>(), {
+  title: '',
+  isActive: false,
+})
 </script>
 
 <style lang="scss" scoped>
