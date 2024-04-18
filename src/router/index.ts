@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/set-password/:token',
         name: 'set-password',
-        component: () => import('../pages/SetNewPasswordView.vue')
+        component: () => import('../pages/[token].vue')
     },
     {
         path: '/categories',
@@ -59,7 +59,8 @@ router.beforeEach(async (from, to, next) => {
        await authStore.checkAuth()
        next()
     }
-    catch {
+    catch(error) {
+        console.log(error)
        next('/auth')
     }
 })

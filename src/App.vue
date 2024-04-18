@@ -15,7 +15,7 @@ import Menu from '@/widgets/Menu/Menu.vue'
 import { useAuthStore } from '@/features/auth/authStore'
 import AuthView from '@/pages/AuthView.vue'
 import SetPasswordView from "@/pages/SetPasswordView.vue";
-import SetNewPasswordView from "@/pages/SetNewPasswordView.vue";
+import SetNewPasswordView from "@/pages/[token].vue";
 
 const authStore = useAuthStore()
 const getTitle = (): string => {
