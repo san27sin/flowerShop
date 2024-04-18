@@ -60,6 +60,8 @@ export const useAuthStore = defineStore('auth', () => {
 
 	async function logout() {
 		isAuth.value = false // сделать запрос на сервес чтобы куки обнулились (рефреш токен)
+		await instance.get(`/auth/logout`)
+		localStorage.removeItem('accessToken')
 		await router.push('/auth')
 	}
 	
@@ -70,6 +72,11 @@ export const useAuthStore = defineStore('auth', () => {
 	function sendNewPassword() {
 		// отправить новый пароль на бэк
 		return 'привет'
+	}
+
+	async function checkAuth() {
+		const response = await instance.get('auth/check')
+		isAuth.value = response.status <= 300;
 	}
 	
 	return {
@@ -85,5 +92,6 @@ export const useAuthStore = defineStore('auth', () => {
 		resetPassword,
 		newPassword,
 		sendNewPassword,
+		checkAuth,
 	}
 })

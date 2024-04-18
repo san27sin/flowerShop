@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from "@/pages/HomeView.vue";
+import {instance} from "@/shared/axios";
+import {useAuthStore} from "@/features/auth/authStore";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -48,5 +50,18 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach(async (from, to, next) => {
+    const authStore = useAuthStore()
+    try {
+        if (to.path === '/auth')
+            return next()
+       await authStore.checkAuth()
+       next()
+    }
+    catch {
+       next('/auth')
+    }
+})
 
 export default router;
